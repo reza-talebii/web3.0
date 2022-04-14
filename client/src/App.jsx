@@ -2,8 +2,27 @@ import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-}
+import {
+  Navbar,
+  Footer,
+  Loader,
+  Services,
+  Transactions,
+  Welcome,
+} from "./Components/Index";
+
+const App = () => {
+  return (
+    <section className="main-h-screen">
+      <section className="gradient-bg-welcome">
+        <Navbar />
+        <Welcome />
+      </section>
+      <Services />
+      <Transactions />
+      <Footer />
+    </section>
+  );
+};
 
 export default App;
