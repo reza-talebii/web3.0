@@ -46,6 +46,7 @@ const Welcome = () => {
             Explore the crypto world. Buy and sell cryptocurrencies easily on
             Krypto.
           </p>
+
           {true && (
             <button
               type="button"
