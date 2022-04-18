@@ -4,9 +4,9 @@
 
 ## Introduction
 
-This project is made with Java training.
+This project is made with [javascriptMastery](https://www.youtube.com/watch?v=Wn_Kb3MR_cU) training.
 
-[javascriptMastery](https://www.youtube.com/watch?v=Wn_Kb3MR_cU)
+
 
 In this program, you can easily transfer your currency from your wallet to others and see your trading history
 
