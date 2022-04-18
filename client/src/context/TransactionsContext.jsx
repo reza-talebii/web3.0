@@ -23,7 +23,7 @@ export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(
-    localStorage.getItem("transactionCount") || 0
+    localStorage.getItem("transactionCount")
   );
   const [formData, setFormData] = useState({
     addressTo: "",
@@ -118,9 +118,23 @@ export const TransactionsProvider = ({ children }) => {
     }
   };
 
+  //CHECK IF TRANSACTIONS EXIST
+  const checkTransactionExist = async () => {
+    try {
+      const transactionsContract = createEthereumContract();
+      await transactionsContract.getTransactionCount();
+
+      window.localStorage.setItem("transactionCount", transactionCount);
+    } catch (error) {
+      console.log(error);
+      throw new Error("No ethereum object");
+    }
+  };
+
   //CALL userWalletConnected FUNCTION
   useEffect(() => {
     userWalletConnected();
+    checkTransactionExist();
   }, []);
 
   //PROVIDER VALUES
