@@ -65,7 +65,7 @@ export const TransactionsProvider = ({ children }) => {
 
         setTransactions(structuredTransactions);
       } else {
-        console.log("Ethereum is not present");
+        setError({ title: "Ethereum is not present", descriptionError: "" });
       }
     } catch (error) {
       setError({ title: "No ethereum object", descriptionError: error });
@@ -75,7 +75,10 @@ export const TransactionsProvider = ({ children }) => {
   //Check if user wallet is connected
   const userWalletConnected = async () => {
     try {
-      if (!ethereum) return alert("Please install metamask");
+      if (!ethereum) {
+        setError({ title: "Please install metamask", descriptionError: "" });
+        return;
+      }
 
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
@@ -83,7 +86,10 @@ export const TransactionsProvider = ({ children }) => {
         setCurrentAccount(accounts[0]);
         getAllTransactions();
       } else {
-        setError({ title: "No ethereum object", descriptionError: "" });
+        setError({
+          title: "you not connected wallet yet ...",
+          descriptionError: "click on connected wallet button",
+        });
       }
     } catch (error) {
       setError({ title: "No ethereum object", descriptionError: error });
@@ -93,7 +99,10 @@ export const TransactionsProvider = ({ children }) => {
   //CONNECT TO ACCOUNT
   const connectAccount = async () => {
     try {
-      if (!ethereum) return alert("Please install metamask");
+      if (!ethereum) {
+        setError({ title: "Please install metamask", descriptionError: "" });
+        return;
+      }
 
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
@@ -159,7 +168,8 @@ export const TransactionsProvider = ({ children }) => {
 
       window.localStorage.setItem("transactionCount", transactionCount);
     } catch (error) {
-      setError({ title: "No ethereum object", descriptionError: error });
+      // setError({ title: "No ethereum object", descriptionError: error });
+      console.log(error);
     }
   };
 
@@ -179,7 +189,6 @@ export const TransactionsProvider = ({ children }) => {
     isLoading,
     transactions,
     error,
-    setError,
   };
 
   return (

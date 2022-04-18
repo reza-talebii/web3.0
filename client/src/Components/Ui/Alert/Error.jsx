@@ -10,7 +10,7 @@ const Error = () => {
   const [closeModal, setCloseModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  const { description, title } = error;
+  const { descriptionError: description, title } = error;
 
   //SHOW ERROR WHEN HAPPENED CHANGE ERROR STATE
   useEffect(() => {
