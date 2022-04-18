@@ -3,7 +3,7 @@ import { BsShieldFillCheck } from "react-icons/bs";
 import { BiSearchAlt } from "react-icons/bi";
 import { RiHeart2Fill } from "react-icons/ri";
 
-import { ServiceCard } from "./";
+import { ServiceCard } from "../";
 
 const Services = () => (
   <div className="flex w-full justify-center items-center gradient-bg-services">
