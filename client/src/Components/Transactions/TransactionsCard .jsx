@@ -1,15 +1,12 @@
 import React from "react";
 
-const TransactionsCard = ({
-  addressTo,
-  addressFrom,
-  timestamp,
-  message,
-  keyword,
-  amount,
-  url,
-}) => {
-  //   const gifUrl = useFetch({ keyword });
+import { shortenAddress } from "../../utils/shortenAddress";
+
+const TransactionsCard = (props) => {
+  const { addressTo, addressFrom, timestamp, message, keyword, amount, url } =
+    props;
+
+  const gifUrl = useFetch({ keyword });
 
   return (
     <div
