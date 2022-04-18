@@ -6,12 +6,10 @@
 
 This project is made with Java training.
 
-![javascriptMastery](https://www.youtube.com/watch?v=Wn_Kb3MR_cU)
+[javascriptMastery](https://www.youtube.com/watch?v=Wn_Kb3MR_cU)
 
 In this program, you can easily transfer your currency from your wallet to others and see your trading history
 
 Using Web 3.0 methodologies, Solidity and Metamask
 
-## Stay up to date with new projects
 
-New major projects coming soon, subscribe to the mailing list to stay up to date https://jsmasterypro.com/newsletter
