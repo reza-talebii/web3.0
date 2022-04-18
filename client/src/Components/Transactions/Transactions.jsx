@@ -1,6 +1,10 @@
 import { useContext } from "react";
 
+import { TransactionsCard } from "../";
+
 import { TransactionsContext } from "../../context/TransactionsContext";
+
+import dummyData from "../../utils/dummyData";
 
 const Transactions = () => {
   const { currentAccount } = useContext(TransactionsContext);
@@ -18,7 +22,11 @@ const Transactions = () => {
           </h3>
         )}
 
-        <div className="flex flex-wrap justify-center items-center mt-10"></div>
+        <div className="flex flex-wrap justify-center items-center mt-10">
+          {/* {[...dummyData, ...transactions].reverse().map((transaction, i) => (
+            <TransactionsCard key={i} {...transaction} />
+          ))} */}
+        </div>
       </div>
     </div>
   );
