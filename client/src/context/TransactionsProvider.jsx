@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { TransactionsContext } from "./TransactionsContext";
+import createEthereumContract from "../utils/createEthereumContract";
 import { ethers } from "ethers";
 
 const { ethereum } = window;
-import { contractABI, contractAddress } from "../utils/constants";
-
-export const TransactionsContext = React.createContext();
-
-const createEthereumContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  const transactionsContract = new ethers.Contract(
-    contractAddress,
-    contractABI,
-    signer
-  );
-
-  return transactionsContract;
-};
 
 export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -85,11 +72,6 @@ export const TransactionsProvider = ({ children }) => {
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
         getAllTransactions();
-      } else {
-        setError({
-          title: "you not connected wallet yet ...",
-          descriptionError: "click on connected wallet button",
-        });
       }
     } catch (error) {
       setError({ title: "No ethereum object", descriptionError: error });
@@ -117,7 +99,7 @@ export const TransactionsProvider = ({ children }) => {
   //SEND TRANSACTIONS
   const sendTransaction = async () => {
     try {
-      if (ethereum) {
+      if (ethereum && currentAccount) {
         const { addressTo, amount, keyword, message } = formData;
         const transactionsContract = createEthereumContract();
         const parsedAmount = ethers.utils.parseEther(amount);
@@ -153,7 +135,10 @@ export const TransactionsProvider = ({ children }) => {
         setTransactionCount(transactionsCount.toNumber());
         window.location.reload();
       } else {
-        setError({ title: "No ethereum object", descriptionError: error });
+        setError({
+          title: "please connect your wallet",
+          descriptionError: 'click on "Connected wallet" button',
+        });
       }
     } catch (error) {
       setError({ title: "No ethereum object", descriptionError: error });
