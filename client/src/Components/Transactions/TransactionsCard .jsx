@@ -1,5 +1,7 @@
 import React from "react";
 
+import useFetch from "../../hook/useFetch";
+
 import { shortenAddress } from "../../utils/shortenAddress";
 
 const TransactionsCard = (props) => {
