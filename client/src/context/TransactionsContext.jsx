@@ -21,6 +21,7 @@ const createEthereumContract = () => {
 
 export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
+  const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount")
@@ -37,6 +38,37 @@ export const TransactionsProvider = ({ children }) => {
     setFormData((prevSate) => ({ ...prevSate, [name]: e.target.value }));
   };
 
+  //GET ALL TRANSACTIONS
+  const getAllTransactions = async () => {
+    try {
+      if (ethereum) {
+        const transactionsContract = createEthereumContract();
+
+        const availableTransactions =
+          await transactionsContract.getAllTransactions();
+
+        const structuredTransactions = availableTransactions.map(
+          (transaction) => ({
+            addressTo: transaction.receiver,
+            addressFrom: transaction.sender,
+            timestamp: new Date(
+              transaction.timestamp.toNumber() * 1000
+            ).toLocaleString(),
+            message: transaction.message,
+            keyword: transaction.keyword,
+            amount: parseInt(transaction.amount._hex) / 10 ** 18,
+          })
+        );
+
+        setTransactions(structuredTransactions);
+      } else {
+        console.log("Ethereum is not present");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //Check if user wallet is connected
   const userWalletConnected = async () => {
     try {
@@ -44,8 +76,12 @@ export const TransactionsProvider = ({ children }) => {
 
       const accounts = await ethereum.request({ method: "eth_accounts" });
 
-      if (accounts.length) setCurrentAccount(accounts[0]);
-      else console.log("no accounts found");
+      if (accounts.length) {
+        setCurrentAccount(accounts[0]);
+        getAllTransactions();
+      } else {
+        console.log("no accounts found");
+      }
     } catch (error) {
       console.log(error);
 
