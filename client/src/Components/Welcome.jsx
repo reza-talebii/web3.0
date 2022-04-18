@@ -1,29 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
-import { Loader } from "./";
+import { Loader, Input } from "./";
 
 import { TransactionsContext } from "../context/TransactionsContext";
-
-//INPUT COMPONENT
-const Input = ({ placeholder, name, type, handleChange }) => {
-  const inputClass =
-    "w-full border-2 border-white my-2 p-2 rounded-sm bg-transparent text-white border-none text-sm white-glassmorphism";
-
-  return (
-    <input
-      className={inputClass}
-      placeholder={placeholder}
-      name={name}
-      type={type}
-      step="0.01"
-      onChange={(e) => handleChange(e, name)}
-    />
-  );
-};
 
 //company Styles
 const companyCommonStyles =
@@ -36,10 +19,8 @@ const Welcome = () => {
     sendTransaction,
     handleChange,
     connectAccount,
+    isLoading,
   } = useContext(TransactionsContext);
-
-  //states
-  const [isLoading, setIsLoading] = useState(false);
 
   //HANDLER FUNCTIONS
   const handleSubmit = (event) => {

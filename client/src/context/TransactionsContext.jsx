@@ -130,6 +130,7 @@ export const TransactionsProvider = ({ children }) => {
     handleChange,
     formData,
     sendTransaction,
+    isLoading,
   };
 
   return (
