@@ -179,6 +179,7 @@ export const TransactionsProvider = ({ children }) => {
     isLoading,
     transactions,
     error,
+    setError,
   };
 
   return (

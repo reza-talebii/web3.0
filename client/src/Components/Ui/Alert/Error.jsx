@@ -1,18 +1,43 @@
+import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 
-const Error = () => {
-  const [closeModal, setCloseModal] = useState(false);
+import { TransactionsContext } from "../../../context/TransactionsContext";
 
-  const topPositionAlert = closeModal ? "top-100" : "top-0";
+const Error = () => {
+  const { error } = useContext(TransactionsContext);
+  const [closeModal, setCloseModal] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  const { description, title } = error;
+
+  //SHOW ERROR WHEN HAPPENED CHANGE ERROR STATE
+  useEffect(() => {
+    if (error) setCloseModal(false);
+  }, [error]);
+
+  const topPositionAlert = closeModal ? "hidden" : "block";
 
   return ReactDOM.createPortal(
     <div
-      className={`bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded fixed w-full ${topPositionAlert}`}
+      className={`bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded fixed w-full top-0 ${topPositionAlert}`}
       role="alert"
     >
-      <strong className="font-bold">Holy smokes!</strong>
-      <span className="block sm:inline">Something seriously bad happened.</span>
+      <strong className="font-bold">Something bad happened! : </strong>
+      <span className="block sm:inline">
+        {title}
+        {"  "}
+        <span
+          className="text-blue-800 cursor-pointer"
+          onClick={() => setShowMore(!showMore)}
+        >
+          See More ...
+        </span>
+        <br />
+        {showMore && String(description)}
+      </span>
+
       <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
         <svg
           onClick={() => setCloseModal(!closeModal)}
