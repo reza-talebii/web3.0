@@ -30,6 +30,7 @@ const Welcome = () => {
     const { addressTo, amount, keyword, message } = formData;
 
     if (!addressTo || !amount || !keyword || !message) return;
+
     sendTransaction();
   };
 

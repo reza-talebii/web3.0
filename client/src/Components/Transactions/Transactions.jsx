@@ -1,13 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { TransactionsCard } from "../";
 
 import { TransactionsContext } from "../../context/TransactionsContext";
 
-import dummyData from "../../utils/dummyData";
+// import dummyData from "../../utils/dummyData";
 
 const Transactions = () => {
   const { currentAccount, transactions } = useContext(TransactionsContext);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
