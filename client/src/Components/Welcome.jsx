@@ -10,10 +10,6 @@ import { TransactionsContext } from "../context/TransactionsContext";
 
 //INPUT COMPONENT
 const Input = ({ placeholder, name, type, handleChange }) => {
-  const transactions = useContext(TransactionsContext);
-
-  console.log(transactions);
-
   const inputClass =
     "w-full border-2 border-white my-2 p-2 rounded-sm bg-transparent text-white border-none text-sm white-glassmorphism";
 
@@ -34,12 +30,25 @@ const companyCommonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
 const Welcome = () => {
+  const {
+    currentAccount,
+    formData,
+    sendTransaction,
+    handleChange,
+    connectAccount,
+  } = useContext(TransactionsContext);
+
+  //states
   const [isLoading, setIsLoading] = useState(false);
 
   //HANDLER FUNCTIONS
-  const connectWallet = () => {};
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { addressTo, amount, keyword, message } = formData;
+
+    if (!addressTo || !amount || !keyword || !message) return;
+    sendTransaction();
+  };
 
   return (
     <div className="flex w-full justify-center items-center">
@@ -53,10 +62,10 @@ const Welcome = () => {
             Krypto.
           </p>
 
-          {true && (
+          {!currentAccount && (
             <button
               type="button"
-              onClick={connectWallet}
+              onClick={connectAccount}
               className="flex w-full flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
             >
               <AiFillPlayCircle className="text-white mr-2" />
