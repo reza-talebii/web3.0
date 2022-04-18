@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
@@ -6,8 +6,14 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { Loader } from "./";
 
+import { TransactionsContext } from "../context/TransactionsContext";
+
 //INPUT COMPONENT
 const Input = ({ placeholder, name, type, handleChange }) => {
+  const transactions = useContext(TransactionsContext);
+
+  console.log(transactions);
+
   const inputClass =
     "w-full border-2 border-white my-2 p-2 rounded-sm bg-transparent text-white border-none text-sm white-glassmorphism";
 
