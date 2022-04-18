@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 
+const { ethereum } = window;
 import { contractABI, contractAddress } from "../utils/constants";
 
 export const TransactionsContext = React.createContext();
-
-const { ethereum } = window;
 
 const createEthereumContract = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
@@ -143,7 +142,7 @@ export const TransactionsProvider = ({ children }) => {
           await transactionsContract.getTransactionCount();
 
         setTransactionCount(transactionsCount.toNumber());
-        // window.location.reload();
+        window.location.reload();
       } else {
         console.log("No ethereum object");
       }
@@ -181,6 +180,7 @@ export const TransactionsProvider = ({ children }) => {
     formData,
     sendTransaction,
     isLoading,
+    transactions,
   };
 
   return (
