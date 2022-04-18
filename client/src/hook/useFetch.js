@@ -7,7 +7,6 @@ const useFetch = ({ keyword }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchGifs = async () => {
-    setLoading(true);
     try {
       const response = await fetch(
         `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&q=${keyword

@@ -21,10 +21,14 @@ const createEthereumContract = () => {
 export const TransactionsProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [transactions, setTransactions] = useState([]);
+
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount")
   );
+
   const [formData, setFormData] = useState({
     addressTo: "",
     amount: "",
@@ -64,7 +68,7 @@ export const TransactionsProvider = ({ children }) => {
         console.log("Ethereum is not present");
       }
     } catch (error) {
-      console.log(error);
+      setError({ title: "No ethereum object", descriptionError: error });
     }
   };
 
@@ -79,12 +83,10 @@ export const TransactionsProvider = ({ children }) => {
         setCurrentAccount(accounts[0]);
         getAllTransactions();
       } else {
-        console.log("no accounts found");
+        setError({ title: "No ethereum object", descriptionError: "" });
       }
     } catch (error) {
-      console.log(error);
-
-      throw new Error("no ethereum object");
+      setError({ title: "No ethereum object", descriptionError: error });
     }
   };
 
@@ -99,9 +101,7 @@ export const TransactionsProvider = ({ children }) => {
 
       setCurrentAccount(accounts[0]);
     } catch (error) {
-      console.log(error);
-
-      throw new Error("no ethereum object");
+      setError({ title: "No ethereum object", descriptionError: error });
     }
   };
 
@@ -144,12 +144,10 @@ export const TransactionsProvider = ({ children }) => {
         setTransactionCount(transactionsCount.toNumber());
         window.location.reload();
       } else {
-        console.log("No ethereum object");
+        setError({ title: "No ethereum object", descriptionError: error });
       }
     } catch (error) {
-      console.log(error);
-
-      throw new Error("No ethereum object");
+      setError({ title: "No ethereum object", descriptionError: error });
     }
   };
 
@@ -161,8 +159,7 @@ export const TransactionsProvider = ({ children }) => {
 
       window.localStorage.setItem("transactionCount", transactionCount);
     } catch (error) {
-      console.log(error);
-      throw new Error("No ethereum object");
+      setError({ title: "No ethereum object", descriptionError: error });
     }
   };
 
@@ -181,6 +178,7 @@ export const TransactionsProvider = ({ children }) => {
     sendTransaction,
     isLoading,
     transactions,
+    error,
   };
 
   return (
