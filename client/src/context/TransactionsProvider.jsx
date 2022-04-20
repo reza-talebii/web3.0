@@ -11,6 +11,7 @@ export const TransactionsProvider = ({ children }) => {
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount")
@@ -127,6 +128,7 @@ export const TransactionsProvider = ({ children }) => {
         console.log(`Loading - ${transactionHash.hash}`);
         await transactionHash.wait();
         console.log(`Success - ${transactionHash.hash}`);
+        setSuccess(true);
         setIsLoading(false);
 
         const transactionsCount =
@@ -174,6 +176,7 @@ export const TransactionsProvider = ({ children }) => {
     isLoading,
     transactions,
     error,
+    success,
   };
 
   return (

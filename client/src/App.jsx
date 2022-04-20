@@ -9,15 +9,17 @@ import {
   Transactions,
   Welcome,
   Error,
+  Success,
 } from "./Components/Index";
 
 const App = () => {
-  const { error } = useContext(TransactionsContext);
+  const { error, success } = useContext(TransactionsContext);
 
   return (
     <section className="main-h-screen">
       <section className="gradient-bg-welcome">
         {error && <Error />}
+        {success && <Success />}
         <Navbar />
         <Welcome />
       </section>
