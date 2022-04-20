@@ -1,33 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import { Input } from "../";
+import { Input, Loader } from "../";
 
-const validate = {
-  addressTo: {
-    required: true,
-    pattern: /^0x[a-fA-F0-9]{40}$/,
-  },
-  amount: {
-    required: true,
-    pattern: /^\d+$/,
-  },
-  keyword: {
-    required: true,
-  },
-  message: {
-    required: true,
-  },
-};
-
-const Form = ({ handleChange, isLoading }) => {
+const Form = ({ isLoading, handleSubmit }) => {
   const {
     register,
     handleSubmit: submitForm,
     formState: { errors },
   } = useForm();
-
-  const handleSubmit = (data) => console.log(data);
 
   return (
     <>
@@ -36,37 +17,29 @@ const Form = ({ handleChange, isLoading }) => {
           placeholder="Address To"
           name="addressTo"
           type="text"
-          handleChange={handleChange}
           register={register}
-          validate={validate.addressTo}
-          error={error}
+          error={errors}
         />
         <Input
           placeholder="Amount (ETH)"
           name="amount"
           type="number"
-          handleChange={handleChange}
           register={register}
-          validate={validate.amount}
-          error={error}
+          error={errors}
         />
         <Input
           placeholder="Keyword (Gif)"
           name="keyword"
           type="text"
-          handleChange={handleChange}
           register={register}
-          validate={validate.keyword}
-          error={error}
+          error={errors}
         />
         <Input
           placeholder="Enter Message"
           name="message"
           type="text"
-          handleChange={handleChange}
           register={register}
-          validate={validate.message}
-          error={error}
+          error={errors}
         />
 
         {/* LINE */}

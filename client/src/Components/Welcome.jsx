@@ -19,20 +19,12 @@ const Welcome = () => {
     currentAccount,
     formData,
     sendTransaction,
-    handleChange,
     connectAccount,
     isLoading,
   } = useContext(TransactionsContext);
 
   //HANDLER FUNCTIONS
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const { addressTo, amount, keyword, message } = formData;
-
-    if (!addressTo || !amount || !keyword || !message) return;
-
-    // sendTransaction();
-  };
+  const handleSubmit = () => sendTransaction();
 
   return (
     <div className="flex w-full justify-center items-center">
@@ -97,11 +89,7 @@ const Welcome = () => {
             </div>
           </div>
           <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-            <Form
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              isLoading={isLoading}
-            />
+            <Form handleSubmit={handleSubmit} isLoading={isLoading} />
           </div>
         </div>
       </div>
