@@ -4,7 +4,7 @@
 
 ## اسکرین شات
 
-![crypto](https://i.ibb.co/DVF4tNW/image.png)
+![اسکرین شات](https://i.ibb.co/DVF4tNW/image.png)
 
 
 
